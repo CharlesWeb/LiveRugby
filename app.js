@@ -1,8 +1,12 @@
-var socket = require('socket.io');
-var http = require('http');
-var fs = require('fs');
+var express = require('express');
+var app = express();
 
-var page = null;
+var http = require('http').Server(app);
+
+var fs = require('fs');
+var socket = require('socket.io');
+
+/*var page = null;
 fs.readFile('./index.html', function(err, data){
   page = data;
   console.log(page)
@@ -10,6 +14,10 @@ fs.readFile('./index.html', function(err, data){
 
 var server = http.createServer(function (req, res){
   res.end('hello');
+});*/
+
+app.get('/', function(req, res){
+  res.sendFile('index.html');
 });
 
-server.listen(8080);
+server.listen(3000);
