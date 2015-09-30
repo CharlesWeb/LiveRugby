@@ -13,17 +13,20 @@
 
       <button id="send">Send</button>
 
-      <script>
-      document.querySelector('button').addEventListener('click', function(){
-        socket.emit('message', $("#message").val());
-        console.log($("#message").val());
-      });
-      </script>
+      </br>
+      <input id="posBalle" type="range" min="0" max="100" step="10" style="width: 50%;">
 
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
+      document.querySelector('button').addEventListener('click', function(){
+        socket.emit('message', $("#message").val());
+      });
+
+      $('#posBalle').on('input',function(){
+        socket.emit('position',$('#posBalle').val());
+      });
     </script>
 
   </body>

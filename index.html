@@ -1,10 +1,33 @@
-<h1>Ceci est ma page qui fonctionne véritablement</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rugby</title>
 
-<script src="/socket.io/socket.io.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  </head>
+  <body>
 
-<script>
-  var socket = io();
-  socket.on('news', function(body){
-    console.log(body);
-  })
-</script>
+    <h1>Francia (los boludos) / Argentina (los pumas)</h1>
+
+    <h2>Messagerie</h2>
+    <ul id="newsfeed"></ul>
+
+    <h2>Position du ballon</h2>
+    <input id="positionValue" type="range" min="0" max="100" step="10" style="width: 50%;"/>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on('news', function(body){
+        $('#newsfeed').append($('<li>').text(body));
+      });
+
+      socket.on('position', function(pos){
+        $('#positionValue').val(pos);
+      });
+    </script>
+
+  </body>
+</html>
